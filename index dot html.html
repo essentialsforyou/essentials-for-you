@@ -1,37 +1,648 @@
+```html
 <!DOCTYPE html>
-<html>
-  <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-    <title>TextEdit</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-      html, body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-      }
-      body {
-        box-sizing: border-box;
-        padding: 15px;
-        font-family: "Roboto", sans-serif;
-      }
-    </style>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        document.body.focus();
-      }, false);
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      window.addEventListener("beforeunload", function (event) {
-        // If the user has entered text, then warn before exiting.
-        if (document.body.textContent.trim() != '') {
-          event.preventDefault();
-          event.returnValue = '';
-        }
-      });
-    </script>
-  </head>
-  <body contenteditable>
+  <title>Essentials for You</title>
+  <meta name="description"
+        content="Essentials for You — thoughtfully chosen essentials and inspiration for everyday life.">
 
-  </body>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f8f7f3;
+      color: #181818;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAVIGATION */
+
+    header {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      border-bottom: 1px solid #e4e2dc;
+      background: #f8f7f3;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 34px;
+      font-size: 13px;
+      letter-spacing: .5px;
+    }
+
+    nav a {
+      transition: opacity .2s ease;
+    }
+
+    nav a:hover {
+      opacity: .45;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 6%;
+      background:
+        linear-gradient(
+          rgba(248,247,243,.18),
+          rgba(248,247,243,.18)
+        ),
+        url("https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=2000&q=90")
+        center / cover;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      background: rgba(248,247,243,.92);
+      padding: 65px 55px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(50px, 8vw, 92px);
+      line-height: .95;
+      margin-bottom: 28px;
+    }
+
+    .hero p {
+      max-width: 500px;
+      margin: auto;
+      color: #606060;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .hero-button {
+      display: inline-block;
+      margin-top: 34px;
+      padding: 15px 30px;
+      background: #181818;
+      color: white;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      transition: .25s ease;
+    }
+
+    .hero-button:hover {
+      background: #444;
+    }
+
+    /* GENERAL */
+
+    section {
+      padding: 110px 6%;
+    }
+
+    .section-title {
+      max-width: 650px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    .section-title h2 {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      color: #777;
+      line-height: 1.7;
+    }
+
+    /* ESSENTIALS */
+
+    .essentials-grid {
+      max-width: 1250px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .essential-card {
+      height: 430px;
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      color: white;
+    }
+
+    .essential-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        transparent 30%,
+        rgba(0,0,0,.7)
+      );
+    }
+
+    .essential-content {
+      position: relative;
+      z-index: 2;
+      padding: 32px;
+    }
+
+    .essential-content h3 {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 34px;
+      margin-bottom: 5px;
+    }
+
+    .essential-content p {
+      font-size: 13px;
+      opacity: .9;
+    }
+
+    .beauty {
+      background-image:
+        url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1000&q=85");
+    }
+
+    .style {
+      background-image:
+        url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1000&q=85");
+    }
+
+    .living {
+      background-image:
+        url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=85");
+    }
+
+    /* EDITOR'S NOTE */
+
+    .editor {
+      background: #eae8e2;
+    }
+
+    .editor-inner {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .editor-inner h2 {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 46px;
+      margin-bottom: 25px;
+    }
+
+    .editor-inner p {
+      max-width: 650px;
+      margin: auto;
+      color: #5d5d5d;
+      line-height: 1.9;
+    }
+
+    /* INSPIRATION */
+
+    .inspiration-grid {
+      max-width: 1250px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+    }
+
+    .inspiration-image {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .inspiration-item h3 {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 29px;
+      margin-top: 22px;
+    }
+
+    .inspiration-item p {
+      color: #707070;
+      margin-top: 8px;
+      line-height: 1.7;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-bottom: 1px solid #181818;
+      padding-bottom: 4px;
+    }
+
+    /* NEWSLETTER */
+
+    .newsletter {
+      background: #181818;
+      color: white;
+      text-align: center;
+    }
+
+    .newsletter-inner {
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .newsletter h2 {
+      font-family: Georgia, serif;
+      font-size: 44px;
+      font-weight: 400;
+      margin-bottom: 15px;
+    }
+
+    .newsletter p {
+      color: #c9c9c9;
+      line-height: 1.7;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      margin: 35px auto 0;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 16px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .newsletter-form button {
+      padding: 0 25px;
+      border: none;
+      background: white;
+      color: #181818;
+      cursor: pointer;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 55px 6%;
+      text-align: center;
+      background: #f8f7f3;
+    }
+
+    footer .logo {
+      margin-bottom: 18px;
+    }
+
+    footer p {
+      color: #888;
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 25px 0;
+      font-size: 12px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 750px) {
+
+      header {
+        height: 70px;
+      }
+
+      nav {
+        gap: 12px;
+        font-size: 10px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .hero {
+        min-height: 75vh;
+        padding: 30px 5%;
+      }
+
+      .hero-inner {
+        padding: 45px 25px;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      section {
+        padding: 75px 5%;
+      }
+
+      .section-title h2 {
+        font-size: 38px;
+      }
+
+      .essentials-grid,
+      .inspiration-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .essential-card {
+        height: 360px;
+      }
+
+      .inspiration-image {
+        height: 380px;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .newsletter-form input,
+      .newsletter-form button {
+        height: 52px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <header>
+    <a href="#" class="logo">Essentials for You</a>
+
+    <nav>
+      <a href="#essentials">Essentials</a>
+      <a href="#inspiration">Inspiration</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-inner">
+
+        <div class="eyebrow">
+          Essentials for You
+        </div>
+
+        <h1>Live Simply.</h1>
+
+        <p>
+          Thoughtfully chosen essentials and inspiration
+          for making everyday life feel a little better.
+        </p>
+
+        <a href="#essentials" class="hero-button">
+          EXPLORE
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- ESSENTIALS -->
+
+    <section id="essentials">
+
+      <div class="section-title">
+        <h2>The Essentials</h2>
+        <p>
+          Discover things worth making space for.
+        </p>
+      </div>
+
+      <div class="essentials-grid">
+
+        <a href="#" class="essential-card beauty">
+          <div class="essential-content">
+            <h3>Beauty</h3>
+            <p>Simple rituals. Thoughtful choices.</p>
+          </div>
+        </a>
+
+        <a href="#" class="essential-card style">
+          <div class="essential-content">
+            <h3>Style</h3>
+            <p>Timeless pieces for everyday life.</p>
+          </div>
+        </a>
+
+        <a href="#" class="essential-card living">
+          <div class="essential-content">
+            <h3>Living</h3>
+            <p>Objects that make life feel better.</p>
+          </div>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- EDITORIAL STATEMENT -->
+
+    <section class="editor">
+
+      <div class="editor-inner">
+
+        <h2>Choose what matters.</h2>
+
+        <p>
+          Essentials for You is a curated space for
+          discovering beautiful, useful, and meaningful
+          things. From everyday essentials to ideas
+          worth exploring, everything is chosen with
+          intention.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- INSPIRATION -->
+
+    <section id="inspiration">
+
+      <div class="section-title">
+
+        <h2>Inspiration</h2>
+
+        <p>
+          Ideas, guides, and inspiration for your everyday.
+        </p>
+
+      </div>
+
+
+      <div class="inspiration-grid">
+
+        <article class="inspiration-item">
+
+          <img
+            class="inspiration-image"
+            src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1400&q=90"
+            alt="Minimalist interior"
+          >
+
+          <h3>The Beauty of Less</h3>
+
+          <p>
+            Creating a space that feels calm,
+            considered, and completely yours.
+          </p>
+
+          <a href="#" class="read-more">
+            Read Article
+          </a>
+
+        </article>
+
+
+        <article class="inspiration-item">
+
+          <img
+            class="inspiration-image"
+            src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=90"
+            alt="Minimal fashion"
+          >
+
+          <h3>Build Your Everyday</h3>
+
+          <p>
+            Small choices that can transform
+            the way your everyday feels.
+          </p>
+
+          <a href="#" class="read-more">
+            Read Article
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- NEWSLETTER -->
+
+    <section class="newsletter">
+
+      <div class="newsletter-inner">
+
+        <h2>Stay inspired.</h2>
+
+        <p>
+          Get occasional inspiration, new discoveries,
+          and everyday essentials delivered to your inbox.
+        </p>
+
+        <form class="newsletter-form">
+
+          <input
+            type="email"
+            placeholder="Your email address"
+            required
+          >
+
+          <button type="submit">
+            JOIN
+          </button>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer id="about">
+
+    <div class="logo">
+      Essentials for You
+    </div>
+
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <p>
+      © 2026 Essentials for You · essentials for you.ca
+    </p>
+
+  </footer>
+
+</body>
 </html>
-
+```
